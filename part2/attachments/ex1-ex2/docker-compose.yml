@@ -1,0 +1,11 @@
+services: 
+    simple-web-service:  
+      build: .
+      volumes: 
+        - ./text.log:/usr/src/app/text.log
+      container_name: simple
+
+      #for the exercise 2.2:
+      command: server 
+      ports:
+      - "8080:8080"
