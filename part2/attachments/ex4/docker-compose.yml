@@ -1,0 +1,19 @@
+services: 
+    frontend:  
+      build:
+        context: .
+        args:
+          - REACT_APP_BACKEND_URL=http://localhost:8080
+      ports:
+        - "5000:5000"
+    backend:
+      build:
+        context: ../example-backend/.
+      ports:
+        - "8080:8080"
+      environment: 
+        - REQUEST_ORIGIN=http://localhost:5000
+        - REDIS_HOST=redis
+    redis:
+      image: redis
+      restart: unless-stopped # that will keep the container running unless it’s stopped: with always the stopped container is started after reboot for example
