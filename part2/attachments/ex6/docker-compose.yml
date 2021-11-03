@@ -27,6 +27,9 @@ services:
       image: postgres
       restart: unless-stopped
       container_name: tietokanta
+      environment:
+        - POSTGRES_PASSWORD=salasana
+
 
 
      

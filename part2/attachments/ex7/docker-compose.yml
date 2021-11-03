@@ -1,0 +1,36 @@
+services:
+#1
+    kurkkumopo-frontend:  
+      build: .
+      ports:
+        - "3000:3000"
+      command: ["serve", "-s", "-l", "3000", "build"]
+#2
+    kurkkumopo-backend:
+      build:
+        context: ../ml-kurkkumopo-backend/.
+      command: ["python", "-u", "app.py"]
+      ports:
+        - "5000:5000"
+      #kurkkumopo-trainingin täytyy ensin valmistaa model:
+      depends_on:
+        - kurkkumopo-training
+      volumes: 
+        - kurkkumopomodel:/src/model #volumelle nimi
+#3
+    kurkkumopo-training:
+      build:
+        context: ../ml-kurkkumopo-training/.
+      command: ["python", "-u", "train.py"]
+      volumes:
+        - kurkkumopomodel:/src/model
+        - kurkkumopodata:/src/data
+        - kurkkumopoimages:/src/imgs
+
+#täällä pitää vielä kertoa, mitä volumeja käytössä:
+volumes:
+  kurkkumopomodel:
+  kurkkumopodata:
+  kurkkumopoimages:
+
+     

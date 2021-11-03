@@ -1,0 +1,56 @@
+services:
+#1
+    frontend:  
+      build:
+        context: .
+        args:
+          - REACT_APP_BACKEND_URL=http://backend:8080/
+      ports:
+        - "5000"
+      networks:
+        - my-network
+#2
+    backend:
+      build:
+        context: ../example-backend/.
+      ports:
+        - "8080"
+      environment: 
+        - REQUEST_ORIGIN=http://frontend:5000
+        - REDIS_HOST=redis
+        - POSTGRES_HOST=db
+        - POSTGRES_PASSWORD=salainen
+      networks:
+        - my-network
+#3
+    redis:
+      image: redis
+      restart: unless-stopped
+      networks:
+        - my-network
+      volumes:
+        - ./redisdata:/data
+#4
+    db:
+      image: postgres
+      restart: unless-stopped
+      container_name: tietokanta
+      environment:
+        - POSTGRES_PASSWORD=salainen
+      networks:
+        - my-network
+      volumes: 
+        - ./database:/var/lib/postgresql/data
+#5
+    proxy:
+      image: nginx
+      volumes: 
+        - ./proxy-conf/nginx.conf:/etc/nginx/nginx.conf
+      ports:
+        - "80:80"
+      networks:
+        - my-network
+
+networks:
+  my-network:
+    name: my-network
