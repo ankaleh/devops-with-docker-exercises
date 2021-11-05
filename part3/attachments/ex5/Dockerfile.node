@@ -1,0 +1,17 @@
+
+FROM node:16-alpine
+
+# Use /usr/src/app as our workdir. The following instructions will be executed in this location.
+WORKDIR /usr/src/app
+
+RUN adduser -D appuser
+
+COPY . .
+
+RUN npm install && \
+      REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL} npm run build && \
+        npm install -g serve
+
+USER appuser
+# When running docker run the command will be ./hello.sh
+CMD serve -s -l 5000 build
