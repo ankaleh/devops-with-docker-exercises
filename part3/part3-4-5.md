@@ -4,7 +4,7 @@
 
 2) Optimoitiin Dockerfilet ([backend](./attachments/ex4/Dockerfile.backend) ja [frontend](./attachments/ex4/Dockerfile.frontend))
 
-3) Muutosten jälkeen frontend-imagen koko pieneni 499,08 megatavuun, mutta backendin koko pysyi suurin piirtein samana, mihin en löytänyt syytä.
+3) Muutosten jälkeen frontend-imagen koko pieneni 499,08 megatavuun, mutta backendin koko pysyi suurin piirtein samana.
 
 
 ## Exercise 3.5
@@ -14,3 +14,5 @@
 2) Node:16-alpineen siirtymisen jälkeen jälkeen frontendin koko pieneni 406,35 megatavuun. 
 
     [Frontendin Dockerfileen](./attachments/ex5/Dockerfile.node)
+
+3) Kokeiltiin vielä, miten paljon backend-imagen koko kasvaa, jos ei käytetä Golang-imagea ([muokattuun Dockerfileen](./attachments/ex5/Dockerfile.backend)). Imagen koko on nyt 728,3 MB, eli image kasvoi yli 80 megatavua.

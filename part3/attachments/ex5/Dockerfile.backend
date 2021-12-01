@@ -1,0 +1,24 @@
+
+FROM alpine:latest
+
+WORKDIR /usr/src/app
+
+RUN apk add build-base && \
+        adduser -D appuser && \
+                apk add --upgrade go
+
+COPY . .
+
+RUN go build && \
+        go test ./... && \
+            rm -rf /var/cache/apk/*
+
+EXPOSE 8080
+
+ENV REQUEST_ORIGIN=https://example.com
+
+ENV PORT=8080
+
+USER appuser
+
+CMD ./server
