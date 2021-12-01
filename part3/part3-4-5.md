@@ -9,7 +9,7 @@
 
 ## Exercise 3.5
 
-1) Ennen siirtymistä node:16-alpineen frontendin koko oli 499,08 MB. Backendissa oli jo käytössä golang:1.16-alpine ja imagen koko on 644,63 MB.
+1) Ennen siirtymistä node:16-alpineen frontendin koko oli 499,08 MB. Backendissa oli jo käytössä golang:1.16-alpine ja imagen koko oli 644,63 MB.
 
 2) Node:16-alpineen siirtymisen jälkeen jälkeen frontendin koko pieneni 406,35 megatavuun. 
 

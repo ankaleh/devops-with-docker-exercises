@@ -14,6 +14,8 @@ RUN apt-get update && \
 
 COPY . .
 
+ARG REACT_APP_BACKEND_URL='http://example.com'
+
 RUN npm install && \
       REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL} npm run build && \
         npm install -g serve && \
